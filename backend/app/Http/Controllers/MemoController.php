@@ -54,8 +54,25 @@ class MemoController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
-        $edit_memo = Memo::find($id);
-        return view('/memo/edit', compact('memos', 'edit_memo') );
+        $edit_memo = Memo::select('memos.*', 'tags.id AS tag_id')
+            ->leftJoin('memo_tags', 'memo_tags.memo_id', '=', 'memos.id')
+            ->leftJoin('tags', 'memo_tags.tag_id', '=', 'tags.id')
+            ->where('memos.user_id', '=', \Auth::id())
+            ->where('memos.id', '=', $id)
+            ->whereNull('memos.deleted_at')
+            ->get();
+
+        $include_tags = [];
+        foreach($edit_memo as $memo){
+            array_push($include_tags, $memo['tag_id']);
+        }
+
+        $tags = Tag::where('user_id', '=', \Auth::id())
+            ->whereNull('deleted_at')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('/memo/edit', compact('memos', 'edit_memo', 'include_tags', 'tags') );
     }
 
     public function update(Request $request){
