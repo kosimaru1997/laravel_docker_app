@@ -11,7 +11,7 @@ RUN apt-get update && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
   docker-php-ext-install intl pdo_mysql zip bcmath
-
+# laravel/ui(bootstrap)を使用するためnodejs,npmのインストールが必要
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN npm install \
   npm run dev
