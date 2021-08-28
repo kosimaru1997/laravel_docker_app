@@ -90,11 +90,11 @@
                 </div>
                 <div class="col-md-4 p-0">
                     <div class="card">
-                        <div class="card-header d-flex justify-content-between">メモ一覧 <a href="{{ route('home') }}"><i class="fas fa-plus-circle"></i></a></div>
+                        <div class="card-header d-flex justify-content-between">メモ一覧 <a href="{{ route('memo') }}"><i class="fas fa-plus-circle"></i></a></div>
                         <div class="card-body my-card-body">
-                    {{-- @foreach($memos as $memo)
-                          <a href="/edit/{{$memo['id']}}" class="card-text d-block elipsis mb-2">{{ $memo['content'] }}</a>
-                    @endforeach --}}
+                    @foreach($memos as $memo)
+                          <a href="{{ route('edit',['id'=>$memo])}}" class="card-text d-block elipsis mb-2">{{ $memo['content'] }}</a>
+                    @endforeach
                         </div>
                     </div>
                 </div>
