@@ -76,32 +76,7 @@
         </nav>
 
         <main class="py-4">
-            <div class="row">
-                <div class="col-md-2 p-0">
-                    <div class="card">
-                        <div class="card-header">タグ一覧</div>
-                        <div class="card-body my-card-body">
-                          <a href="/" class="card-text d-block mb-2">すべて表示</a>
-                    {{-- @foreach($tags as $tag)
-                          <a href="/?tag={{$tag['id']}}" class="card-text d-block elipsis mb-2">{{ $tag['name'] }}</a>
-                    @endforeach --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 p-0">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">メモ一覧 <a href="{{ route('home') }}"><i class="fas fa-plus-circle"></i></a></div>
-                        <div class="card-body my-card-body">
-                    {{-- @foreach($memos as $memo)
-                          <a href="/edit/{{$memo['id']}}" class="card-text d-block elipsis mb-2">{{ $memo['content'] }}</a>
-                    @endforeach --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 p-0">
-                    @yield('content')
-                </div>
-            </div>
+            @yield('content')
         </main>
     </div>
 </body>
