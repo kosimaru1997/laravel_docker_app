@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('javascript')
-<script src="{{ asset('js/comfirm.js') }}" defer></script>
+<script src="/js/confirm.js" defer></script>
 @endsection
 
 @section('content')
