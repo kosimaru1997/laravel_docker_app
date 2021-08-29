@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @yield('javascript')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -76,15 +77,15 @@
         </nav>
 
         <main class="py-4">
-            <div class="row">
+            <div class="row m-0">
                 <div class="col-md-2 p-0">
                     <div class="card">
                         <div class="card-header">タグ一覧</div>
                         <div class="card-body my-card-body">
                           <a href="/" class="card-text d-block mb-2">すべて表示</a>
-                    {{-- @foreach($tags as $tag)
-                          <a href="/?tag={{$tag['id']}}" class="card-text d-block elipsis mb-2">{{ $tag['name'] }}</a>
-                    @endforeach --}}
+                    @foreach($tags as $tag)
+                          <a href="/memo/?tag={{$tag['id']}}" class="card-text d-block elipsis mb-2">{{ $tag['name'] }}</a>
+                    @endforeach
                         </div>
                     </div>
                 </div>

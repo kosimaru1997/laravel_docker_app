@@ -14,22 +14,12 @@ class MemoController extends Controller
 
     public function index()
     {
-        $memos = Memo::select('memos.*')
-            ->where('user_id', '=', \Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('id', 'DESC')
-            ->get();
-
-        $tags = Tag::where('user_id', '=', \Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('id', 'DESC')
-            ->get();
-
-        return view('/memo/create', compact('memos','tags'));
+        return view('/memo/create');
     }
 
     public function store(Request $request) {
         $posts = $request->all();
+        $request->validate([ 'content' => 'required']);
 
         DB::transaction(function() use($posts){
             $memo_id = Memo::insertGetId(['content' => $posts['content'], 'user_id' => \Auth::id()]);
@@ -40,19 +30,16 @@ class MemoController extends Controller
                 MemoTag::insert(['memo_id' => $memo_id, 'tag_id' => $tag_id]);
             };
 
-            foreach($posts['tags'] as $tag){
-                MemoTag::insert(['memo_id' => $memo_id, 'tag_id'=> $tag]);
-            };
+            if(!empty($posts['tags'][0])){
+                foreach($posts['tags'] as $tag){
+                    MemoTag::insert(['memo_id' => $memo_id, 'tag_id' => $tag]);
+                }
+            }
         });
         return redirect( route('memo') );
     }
 
     public function edit($id){
-        $memos = Memo::select('memos.*')
-            ->where('user_id', '=', \Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('id', 'DESC')
-            ->get();
 
         $edit_memo = Memo::select('memos.*', 'tags.id AS tag_id')
             ->leftJoin('memo_tags', 'memo_tags.memo_id', '=', 'memos.id')
@@ -72,21 +59,18 @@ class MemoController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
-        return view('/memo/edit', compact('memos', 'edit_memo', 'include_tags', 'tags') );
+        return view('/memo/edit', compact('edit_memo', 'include_tags', 'tags') );
     }
 
     public function update(Request $request){
         $posts = $request->all();
+        $request->validate([ 'content' => 'required']);
 
         DB::transaction(function () use($posts){
 
             Memo::where('id', $posts['memo_id'])->update(['content' => $posts['content']]);
 
             MemoTag::where('memo_id', '=', $posts['memo_id'])->delete();
-
-            foreach ($posts['tags'] as $tag) {
-                MemoTag::insert(['memo_id' => $posts['memo_id'], 'tag_id' => $tag]);
-            };
 
             $tag_exists = Tag::where('user_id', '=', \Auth::id())
             ->where('name', '=', $posts['new_tag'])->exists();
