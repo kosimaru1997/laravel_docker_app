@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             $memo_model = new Memo();
             $memos = $memo_model->getMyMemo();
 
-            $tags = Tag::where('user_id', '=', Auth::id())
+            $tags = Tag::where('user_id', '=', \Auth::id())
                 -> whereNull('deleted_at')
                 ->orderBy('id', 'DESC')
                 ->get();
