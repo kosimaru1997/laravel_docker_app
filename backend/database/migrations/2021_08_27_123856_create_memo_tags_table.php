@@ -17,8 +17,8 @@ class CreateMemoTagsTable extends Migration
             $table->unsignedBigInteger('memo_id');
             $table->unsignedBigInteger('tag_id');
 
-            $table->foreign('memo_id')->references('id')->on('memos');
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->foreign('memo_id')->references('id')->on('memos')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 

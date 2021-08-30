@@ -27,3 +27,4 @@ Route::post('/store', [MemoController::class, 'store'])->name('store');
 Route::get('/memo/{id}/edit', [MemoController::class, 'edit'])->name('edit');
 Route::post('/update', [MemoController::class, 'update'])->name('update');
 Route::post('/destroy', [MemoController::class, 'destroy'])->name('destroy');
+Route::post('/destroy_tag', [MemoController::class, 'destroy_tag'])->name('destroy_tag');

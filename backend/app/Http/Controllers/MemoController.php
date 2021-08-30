@@ -78,10 +78,12 @@ class MemoController extends Controller
                 $tag_id = Tag::insertGetId(['user_id' => \Auth::id(), 'name' => $posts['new_tag']]);
                 MemoTag::insert(['memo_id' => $posts['memo_id'], 'tag_id' => $tag_id]);
             };
-
-            foreach($posts['tags'] as $tag){
-                MemoTag::insert(['memo_id' => $posts['memo_id'], 'tag_id'=> $tag]);
+            if(!empty($posts['tags'][0])){
+                foreach($posts['tags'] as $tag){
+                    MemoTag::insert(['memo_id' => $posts['memo_id'], 'tag_id'=> $tag]);
+                };
             };
+
         });
 
         return redirect( route('memo') );
@@ -90,7 +92,17 @@ class MemoController extends Controller
     public function destroy(Request $request){
         $posts = $request->all();
         Memo::where('id', $posts['memo_id'])
-        ->update(['deleted_at' => date("Y-m-d H:i:s", time())]);
+        ->delete();
+        // update(['deleted_at' => date("Y-m-d H:i:s", time())]);
         return redirect( route('memo') );
     }
+
+    public function destroy_tag(Request $request){
+        $posts = $request->all();
+        Tag::where('id', $posts['tag_id'])
+        ->delete();
+        // update(['deleted_at' => date("Y-m-d H:i:s", time())]);
+        return redirect( route('memo') );
+    }
+
 }

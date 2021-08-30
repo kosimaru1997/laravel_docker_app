@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @yield('javascript')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +19,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="/css/memo.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -76,7 +79,41 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="row m-0">
+                <div class="col-md-2 p-0">
+                    <div class="card">
+                        <div class="card-header">タグ一覧</div>
+                        <a href="/memo" class="card-text d-block mt-2 mx-2">すべてのメモを表示</a>
+                        <div class="card-body memo-card-body pt-1">
+                    @foreach($tags as $tag)
+                        <div class="d-flex">
+                            <a href="/memo/?tag={{$tag['id']}}" class="card-text d-block elipsis mb-2 mx-2">
+                                <span class="border rounded px-2">{{ $tag['name'] }}</span>
+                            </a>
+                            <form id="delete-form" action="{{ route('destroy_tag') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="tag_id" value="{{$tag['id']}}"/>
+                                <i class="fas fa-times cursor-p" onclick="deleteHandle(event);"></i>
+                            </form>
+                        </div>
+                    @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-0">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">メモ一覧 <a href="{{ route('memo') }}"><i class="fas fa-plus-circle"></i></a></div>
+                        <div class="card-body memo-card-body">
+                    @foreach($memos as $memo)
+                          <a href="{{ route('edit',['id'=>$memo])}}" class="card-text d-block elipsis mb-2">{{ $memo['content'] }}</a>
+                    @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 p-0">
+                    @yield('content')
+                </div>
+            </div>
         </main>
     </div>
 </body>
