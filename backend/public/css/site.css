@@ -1,0 +1,22 @@
+/* ーーーーカードーーーーー */
+
+.card-list {
+  list-style: none;
+  width: 50%;
+}
+
+.card-image {
+  min-height: 200px;
+  max-height: 280px;
+}
+
+.card-title {
+  max-height: 50px;
+  overflow: hidden;
+}
+
+.card-text {
+  max-height: 50px;
+  overflow: hidden;
+}
+ /* ーーーーーーーーーーーー */

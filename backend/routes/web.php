@@ -30,5 +30,6 @@ Route::post('/update', [MemoController::class, 'update'])->name('update');
 Route::post('/destroy', [MemoController::class, 'destroy'])->name('destroy');
 Route::post('/destroy_tag', [MemoController::class, 'destroy_tag'])->name('destroy_tag');
 
+Route::get('/sites', [SiteController::class, 'index'])->name('sites');
 Route::get('/site/new', [SiteController::class, 'create'])->name('site_new');
 Route::post('/site/store', [SiteController::class, 'store'])->name('site_store');

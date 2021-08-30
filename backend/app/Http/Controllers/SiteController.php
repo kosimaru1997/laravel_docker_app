@@ -10,7 +10,10 @@ class SiteController extends Controller
     //
     public function index()
     {
-        return view('/memo/create');
+        $sites = Site::where('user_id', '=', \Auth::id())->get();
+        // dd($sites);
+
+        return view('/site/index', compact('sites'));
     }
 
     public function create()
