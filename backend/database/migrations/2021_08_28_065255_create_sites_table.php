@@ -16,8 +16,8 @@ class CreateSitesTable extends Migration
         Schema::create('sites', function (Blueprint $table) {
             $table->unsignedBigInteger('id', true);
             $table->text('url');
-            $table->text('title')->nullable()->change();
-            $table->longText('note')->nullable()->change();;
+            $table->text('title')->nullable();
+            $table->longText('note')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
