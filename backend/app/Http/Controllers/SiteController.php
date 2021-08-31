@@ -46,4 +46,10 @@ class SiteController extends Controller
         Site::where('id', $id)->update(['note' => $sites['note']]);
         return redirect( route('site_show',['id' => $id]) );
     }
+
+    public function destroy($id)
+    {
+        Site::where('id', $id)->delete();
+        return redirect( route('sites'));
+    }
 }

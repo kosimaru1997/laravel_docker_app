@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('javascript')
+<script src="/js/confirm.js" defer></script>
+@endsection
 
 @section('content')
 <div class="row pb-3 m-0 border-bottom">
@@ -34,7 +37,10 @@
 </div>
 
 <div class="text-right">
-    <a data-turbolinks="false" class="btn btn-outline-info mr-2" href="#">編集</a>
-    <a class="btn btn-outline-danger mr-2" data-confirm="本当に削除しますか？" rel="nofollow" data-method="delete" href="#">削除</a>
+    <a class="btn btn-outline-info mr-2" href="/site/{{$site->id}}/edit">編集</a>
+    <form class="cursor-p" id="delete-form" action="{{ route('site_destroy', $site->id) }}" method="post">
+        @csrf
+        <a><i class="fas fa-trash mr-3 cursor-p" onclick="deleteHandle(event);"></i></a>
+    </form>
 </div>
 @endsection
