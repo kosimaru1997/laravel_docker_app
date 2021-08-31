@@ -11,6 +11,10 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function sites(){
+        return $this->hasMany(Site::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -40,4 +44,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 }

@@ -9,6 +9,10 @@ class Site extends Model
 {
     use HasFactory;
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     public function saveSiteInfo($url, $note)
     {
 

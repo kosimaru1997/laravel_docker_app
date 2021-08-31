@@ -4,7 +4,7 @@
 <div class="row m-0">
     <div class="col-12">
     <h2 class="ml-2">- Your Site Note -</h2>
-    <div>
+    <div class="d-flex">
         @foreach($sites as $site)
         <li class="list-unstyled card-list my-4">
             <div class="card mx-auto" style="width: 95%;">
@@ -25,19 +25,42 @@
                 <p class="card-text text-dark text-break mb-1">
                     {{ $site->note }}
                 </p>
-                {{-- <p type="button" class="text-center mb-0" data-bs-toggle="modal" data-bs-target="#noteModal_<%= site.id %>">
-                  <i class="fas fa-sort-down fa-2x w-50"></i>
+                <p type="button" class="text-center mb-0" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fas fa-sort-down fa-2x w-50"></i>
                 </p>
-                <%= render 'sites/noteModal', site: site %> --}}
+
+                </p>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
               @endif
-                <div class="text-end mt-3">
-                  <object>
-                      <a href="#"></a>
-                  </object>
-                  {{-- <% if current_user == site.user %>
-                    <object><%= link_to "編集", edit_site_path(site), "data-turbolinks": false, class: "text-info me-3" %></object>
-                    <object><%= link_to "削除", site_path(site), method: :delete, class: "text-danger", data: {confirm: "本当に削除しますか？"} %></object>
-                  <% end %> --}}
+                <div class="text-right mt-3">
+                    <object>
+                        <a href="#" class="text-primary mr-3">詳細</a>
+                    </object>
+                    <object>
+                        <a href="#" class="text-info mr-3">編集</a>
+                    </object>
+                    <object>
+                        <a href="#" method="delete" class="text-danger" onclick="deleteHandle(event);">削除</a>
+                    </object>
                 </div>
             </div>
           </li>
