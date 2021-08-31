@@ -11,7 +11,6 @@ class SiteController extends Controller
     public function index()
     {
         $sites = Site::where('user_id', '=', \Auth::id())->get();
-        // dd($sites);
 
         return view('/site/index', compact('sites'));
     }
@@ -26,6 +25,25 @@ class SiteController extends Controller
         $sites = $request->all();
         $site_model = new Site();
         $site_model->saveSiteInfo($sites['url'], $sites['note']);
-        return redirect( route('site_new') );
+        return redirect( route('sites') );
+    }
+
+    public function show($id)
+    {
+        $site = Site::find($id);
+        return view('/site/show', compact('site'));
+    }
+
+    public function edit($id)
+    {
+        $site = Site::find($id);
+        return view('/site/edit', compact('site'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $sites = $request->all();
+        Site::where('id', $id)->update(['note' => $sites['note']]);
+        return redirect( route('site_show',['id' => $id]) );
     }
 }

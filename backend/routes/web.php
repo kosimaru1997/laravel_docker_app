@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemoController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,6 @@ Route::post('/destroy_tag', [MemoController::class, 'destroy_tag'])->name('destr
 Route::get('/sites', [SiteController::class, 'index'])->name('sites');
 Route::get('/site/new', [SiteController::class, 'create'])->name('site_new');
 Route::post('/site/store', [SiteController::class, 'store'])->name('site_store');
+Route::get('/site/{id}', [SiteController::class, 'show'])->name('site_show');
+Route::get('/site/{id}/edit', [SiteController::class, 'edit'])->name('site_edit');
+Route::post('/site/{id}/update', [SiteController::class, 'update'])->name('site_update');

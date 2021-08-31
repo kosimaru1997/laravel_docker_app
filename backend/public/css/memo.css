@@ -4,11 +4,6 @@
     white-space: nowrap;
 }
 
-.cursor-p{
-    cursor: pointer;
-    z-index:1;
-}
-
 @media screen and (max-width:768px) {
     .memo-card-body{
       display: flex;
