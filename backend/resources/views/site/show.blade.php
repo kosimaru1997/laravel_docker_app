@@ -10,9 +10,9 @@
         </div>
         <div class="col-md-8">
         <a href="{{$site->url}}" target="_blank" rel="noopener noreferrer">
-            <h5 class="card-title">{{$site->title}}</h5>
+            <h4 class="card-title">{{$site->title}}</h4>
         </a>
-        <h4>{{$site->description}}</h4>
+        <h5>{{$site->description}}</h5>
     </div>
 </div>
 
@@ -28,7 +28,7 @@
     </div>
         <h4 casss="px-2">
             @if(!empty($site->note))
-            {{ $site->note }}
+            {!! $Parsedown->text($site->note) !!}
             @else
             No Contents
             @endif

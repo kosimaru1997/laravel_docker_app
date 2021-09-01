@@ -10,11 +10,9 @@ class ApiController extends Controller
     //
     public function preview(Request $request){
         $text = $request->input('text');
-        // $a = 'Hello _Parsedown_!';
         $Parsedown = new \Parsedown();
-        $a = $Parsedown->text($text);
+        $html = $Parsedown->text($text);
 
-
-        return response()->json(['html' => $a]);
+        return response()->json(['html' => $html]);
     }
 }

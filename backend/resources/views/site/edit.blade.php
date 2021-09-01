@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('javascript')
+<script src="/js/preview.js" defer></script>
+@endsection
 
 @section('content')
 <div class="container-fluid">
@@ -7,8 +10,6 @@
         <h2 class="ml-2">{{$site->title}}</h2>
         <div class="col-12">
             <h3 class="ml-2 mt-2">Edit Note</h3>
-            {{-- <div id="flash_messages">
-            </div> --}}
             <form action="/site/{{$site->id}}/update" method="post">
                 @csrf
                 {{-- <div class="tag-form mb-2"> --}}

@@ -31,7 +31,8 @@ class SiteController extends Controller
     public function show($id)
     {
         $site = Site::find($id);
-        return view('/site/show', compact('site'));
+        $Parsedown = new \Parsedown();
+        return view('/site/show', compact('site','Parsedown'));
     }
 
     public function edit($id)

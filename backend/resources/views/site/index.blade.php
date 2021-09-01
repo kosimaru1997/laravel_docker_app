@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('javascript')
+<script src="/js/confirm.js" defer></script>
+@endsection
 
 @section('content')
 
@@ -32,13 +35,13 @@
                     {{ $site->note }}
                 </p>
               @endif
-                <div class="text-right mt-3">
-                    <object>
-                        <a href="site/{{$site->id}}" class="text-primary mr-3">詳細</a>
-                    </object>
-                    <object>
-                        <a href="/site/{{$site->id}}/edit" class="text-info mr-3">編集</a>
-                    </object>
+                <div class="d-flex justify-content-end mt-3">
+                    <a href="site/{{$site->id}}" class="text-primary mr-4">
+                        <i class="fas fa-info-circle fa-lg"></i>
+                    </a>
+                    <a href="/site/{{$site->id}}/edit" class="mr-2">
+                        <i class="far fa-edit fa-lg mt-1 cursor-p"></i>
+                    </a>
                 </div>
             </div>
           </li>

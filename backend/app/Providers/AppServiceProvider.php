@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('*', function ($view) {
+        view()->composer('/memo/*', function ($view) {
 
             $memo_model = new Memo();
             $memos = $memo_model->getMyMemo();

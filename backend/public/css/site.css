@@ -39,6 +39,10 @@
     justify-content: space-between;
   }
 
+  pre {
+    background-color: #f1f3ff;
+  }
+
 /* ーーーーレスポンシブーーーー */
 @media screen and (max-width:768px) {
   .card-list {
