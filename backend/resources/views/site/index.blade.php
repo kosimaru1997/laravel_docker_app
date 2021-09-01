@@ -34,13 +34,10 @@
               @endif
                 <div class="text-right mt-3">
                     <object>
-                        <a href="#" class="text-primary mr-3">詳細</a>
+                        <a href="site/{{$site->id}}" class="text-primary mr-3">詳細</a>
                     </object>
                     <object>
-                        <a href="#" class="text-info mr-3">編集</a>
-                    </object>
-                    <object>
-                        <a href="#" method="delete" class="text-danger">削除</a>
+                        <a href="/site/{{$site->id}}/edit" class="text-info mr-3">編集</a>
                     </object>
                 </div>
             </div>

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('javascript')
+<script src="/js/preview.js" defer></script>
+@endsection
 
 @section('content')
 <div class="container-fluid">

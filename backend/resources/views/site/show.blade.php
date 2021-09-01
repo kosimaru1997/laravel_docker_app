@@ -36,11 +36,13 @@
     </div>
 </div>
 
-<div class="text-right">
-    <a class="btn btn-outline-info mr-2" href="/site/{{$site->id}}/edit">編集</a>
-    <form class="cursor-p" id="delete-form" action="{{ route('site_destroy', $site->id) }}" method="post">
+<div class="d-flex justify-content-end">
+    <a class="mr-4" href="/site/{{$site->id}}/edit">
+        <i class="far fa-edit fa-2x mt-1 cursor-p"></i>
+    </a>
+    <form class="cursor-p mr-2" id="delete-form" action="{{ route('site_destroy', $site->id) }}" method="post">
         @csrf
-        <a><i class="fas fa-trash mr-3 cursor-p" onclick="deleteHandle(event);"></i></a>
+        <a><i class="fas fa-trash fa-2x text-secondary mt-1 mr-3 cursor-p" onclick="deleteHandle(event);"></i></a>
     </form>
 </div>
 @endsection
