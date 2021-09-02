@@ -14,7 +14,7 @@
     <div class="col-md-6 p-0">
         <div class="text-center">
             <h2>Memo</h2>
-            <p>Memoはシンプルなメモツールです。<br/>
+            <p>Memoはシンプルなメモ帳ツールです。<br/>
                 タグ付けによりメモの種類を分け管理出来ます。<br/>
                 マークダウンにも対応しております。
             </p>

@@ -56,6 +56,11 @@
                             @endif
                         @else
                             <li class="nav-item mt-2 mr-2">
+                                <a class="text-secondary" href="{{ route('sites') }}">
+                                    SITES
+                                </a>
+                            </li>
+                            <li class="nav-item mt-2 mr-2">
                                 <a class="text-secondary" href="{{ route('site_new') }}">
                                     POST
                                 </a>

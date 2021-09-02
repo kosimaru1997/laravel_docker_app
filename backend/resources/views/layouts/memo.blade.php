@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    @yield('javascript')
+    <script src="/js/confirm.js" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -66,6 +66,9 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('sites') }}">
+                                        SiteNote
+                                    </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -90,10 +93,10 @@
                             <a href="/memo/?tag={{$tag['id']}}" class="card-text d-block elipsis mb-2 mx-2">
                                 <span class="border rounded px-2">{{ $tag['name'] }}</span>
                             </a>
-                            <form id="delete-form" action="{{ route('destroy_tag') }}" method="POST">
+                            <form class=".btn-dell" action="{{ route('destroy_tag') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="tag_id" value="{{$tag['id']}}"/>
-                                <i class="fas fa-times cursor-p" onclick="deleteHandle(event);"></i>
+                                <button type="submit" class="fas fa-times fa-sm btn btn-outline-danger cursor-p btn-dell p-1"></button>
                             </form>
                         </div>
                     @endforeach
