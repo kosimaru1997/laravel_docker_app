@@ -19,15 +19,19 @@
             <div class="card mx-auto" style="width: 95%;">
             <img src="{{ $site->image }}" alt="画像がありません" class="border-bottom card-image">
             <div class="card-body p-2">
-              {{-- <div class="d-flex py-1 mb-1">
-                @if(empty($site->))
-                  <% site.tags.each do |tag| %>
-                  <div class="border border-secondary rounded px-2 me-2"><%= tag.tag_name %></div>
-                  <% end %>
-                <% else %>
-                  <div class="border border-secondary rounded px-2 me-2">No Tags</div>
-                <% end %>
-              </div> --}}
+              <div class="d-flex py-1 mb-1">
+                @if(!empty($site->tags[0]))
+                  @foreach($site->tags as $tag)
+                    <div class="border border-secondary rounded px-2 mr-2">
+                      {{ $tag->name }}
+                    </div>
+                  @endforeach
+                @else
+                  <div class="border border-secondary rounded px-2 mr-2">
+                      No Tags
+                </div>
+                @endif
+              </div>
               <a href="{{ $site->url }}" target="_blank" rel="noopener noreferrer">
               <h5 class="card-title">{{ $site->title }}</h5></a>
               @if(!empty($site->note))

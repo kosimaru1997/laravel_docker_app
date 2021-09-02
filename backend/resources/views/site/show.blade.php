@@ -17,11 +17,14 @@
 </div>
 
 <div class="row mt-2 mb-4 mx-2">
-    {{-- <div class="border rounded d-flex py-1 px-2 mb-2">
-    <h5 class="mb-1 me-2">tags: </h5>
-        <div class="border border-secondary rounded px-2 me-2">php</div>
-        <div class="border border-secondary rounded px-2 me-2">laravel</div>
-    </div> --}}
+    <div class="border rounded d-flex py-1 px-2 mb-2">
+    <h5 class="mb-1 mr-2">tags: </h5>
+        @foreach($tags as $tag)
+            <div class="border border-secondary rounded px-2 mr-2">
+                {{$tag->name}}
+            </div>
+        @endforeach
+    </div>
     <div class="note w-100 border rounded py-2 px-2">
     <div class="d-flex note-link pe-3">
         <h3 class="fw-bold" style="font-family: sans-serif;">-Note-</h3>

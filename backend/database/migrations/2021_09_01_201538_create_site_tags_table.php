@@ -17,7 +17,7 @@ class CreateSiteTagsTable extends Migration
             $table->unsignedBigInteger('site_id');
             $table->unsignedBigInteger('tag_id');
 
-            $table->foreign('memo_id')->references('id')->on('memos')->onDelete('cascade');
+            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }

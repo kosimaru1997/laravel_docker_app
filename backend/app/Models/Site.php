@@ -13,6 +13,10 @@ class Site extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function tags(){
+        return $this->belongsToMany(Tag::class, 'site_tags');
+    }
+
     public function saveSiteInfo($url, $note)
     {
 
@@ -33,7 +37,8 @@ class Site extends Model
             $title = $node_title->item(0)->nodeValue;
             $image = $node_image->item(0)->nodeValue;
             $description = $node_description->item(0)->nodeValue;
-            Site::insert(['url'=> $url, 'title'=> $title, 'image'=> $image, 'note'=> $note, 'description'=> $description, 'user_id'=> \Auth::id()]);
+            $site_id = Site::insertGetId(['url'=> $url, 'title'=> $title, 'image'=> $image, 'note'=> $note, 'description'=> $description, 'user_id'=> \Auth::id()]);
+            return $site_id;
         }
     }
 }

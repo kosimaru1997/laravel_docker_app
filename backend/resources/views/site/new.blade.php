@@ -15,7 +15,7 @@
                 <div class="bg-site py-3 px-4 mb-2">
                 <div class="tag-form w-75 mb-4">
                     <label for="site_tags">Tags</label>
-                    <input class="form-control" placeholder=",で区切ってください" type="text" name="site[tag]" id="site_tag">
+                    <input class="form-control" placeholder=",で区切ってください" type="text" name="tag" id="site_tag">
                 </div>
                 <input class="form-control mb-3" placeholder="例：https://hogehoge" type="text" name="url" id="site_url">
                 <div class="file-header d-flex">
