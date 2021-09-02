@@ -40,5 +40,6 @@ Route::get('/site/{id}', [SiteController::class, 'show'])->name('site_show');
 Route::get('/site/{id}/edit', [SiteController::class, 'edit'])->name('site_edit');
 Route::post('/site/{id}/update', [SiteController::class, 'update'])->name('site_update');
 Route::post('/site/{id}/destroy', [SiteController::class, 'destroy'])->name('site_destroy');
+Route::get('/search', [SiteController::class, 'search'])->name('search');
 
 Route::get('/api/preview', [ApiController::class, 'preview'])->name('preview');

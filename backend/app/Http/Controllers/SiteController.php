@@ -17,9 +17,18 @@ class SiteController extends Controller
     //
     public function index()
     {
-        $sites = Site::where('user_id', '=', \Auth::id())->get();
+        $query_tag = \Request::query('tag');
+        if(empty($query_tag)){
+            $sites = Site::where('user_id', '=', \Auth::id())->orderBy('created_at', 'DESC')->get();
+        }else{
+            $sites = Tag::find($query_tag)->sites;
+        }
 
-        return view('/site/index', compact('sites'));
+        $site_ids = $sites->pluck('id');
+        $tag_ids = SiteTag::whereIn('site_id',$site_ids)->pluck('tag_id');
+        $tags = Tag::whereIn('id', $tag_ids)->get();
+
+        return view('/site/index', compact('sites', 'tags'));
     }
 
     public function create()
@@ -105,5 +114,41 @@ class SiteController extends Controller
     {
         Site::where('id', $id)->delete();
         return redirect( route('sites'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->all();
+
+        if(is_null($query['tags'])){
+            $user_sites = Site::where('user_id', '=', \Auth::id());
+        }else{
+            $user_sites = Tag::find($query['tags'])->sites;
+        }
+
+        if($query['option'] == 'mix'){
+            $relation = $user_sites->where('title', 'LIKE', "%{$query['word']}%")
+                              ->orWhere('description', 'LIKE', "%{$query['word']}%")
+                              ->orWhere('note', 'LIKE', "%{$query['word']}%")
+                              ->where('user_id', '=', \Auth::id());
+        }elseif($query['option'] == 'title'){
+            $relation = $user_sites->where('title', 'LIKE', "%{$query['word']}%")
+                              ->andWhere('user_id', '=', \Auth::id());
+        }elseif($query['option'] == 'note'){
+            $relation = $user_sites->where('note', 'LIKE', "%{$query['word']}%")
+                              ->andWhere('user_id', '=', \Auth::id());
+        }
+
+        if($query['sort'] == 'new'){
+            $sites = $relation->orderBy('created_at', 'DESC')->get();
+        }else{
+            $sites = $relation->get();
+        }
+
+        $site_ids = $sites->pluck('id');
+        $tag_ids = SiteTag::whereIn('site_id',$site_ids)->pluck('tag_id');
+        $tags = Tag::whereIn('id', $tag_ids)->get();
+
+        return view('/site/index', compact('sites', 'tags'));
     }
 }

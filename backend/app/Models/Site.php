@@ -10,11 +10,11 @@ class Site extends Model
     use HasFactory;
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->orderBy('created_at', 'DESC');;
     }
 
     public function tags(){
-        return $this->belongsToMany(Tag::class, 'site_tags');
+        return $this->belongsToMany(Tag::class, 'site_tags')->orderBy('created_at', 'DESC');;
     }
 
     public function saveSiteInfo($url, $note)

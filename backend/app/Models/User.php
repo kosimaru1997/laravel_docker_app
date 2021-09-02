@@ -12,7 +12,10 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     public function sites(){
-        return $this->hasMany(Site::class);
+        return $this->hasMany(Site::class)->orderBy('created_at', 'DESC');
+    }
+    public function tags(){
+        return $this->hasMany(Tag::class)->orderBy('created_at', 'DESC');
     }
 
     /**

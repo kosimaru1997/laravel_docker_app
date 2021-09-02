@@ -13,6 +13,32 @@
                 <i class="fas fa-plus-circle fa-2x mt-1 ml-3"></i>
             </a>
         </div>
+        <div class="search mr-2">
+        <form class="form-inline justify-content-end d-flex" action="{{route('search')}}" accept-charset="UTF-8" method="get">
+                <select class="mb-2 mr-2" name="option" id="option">
+                    <option value="mix">mix</option>
+                    <option value="title">title</option>
+                    <option value="note">note</option></select>
+                <select class="mb-2 mr-2" name="sort" id="sort">
+                    <option value="new">new</option>
+                    <option value="old">old</option></select>
+                <select class="mb-2 mr-2" name="tags" id="tags">
+                    <option value="">tags</option>
+                    @foreach($tags as $tag)
+                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                    @endforeach
+                </select>
+                <input class="form-control pr-3 mb-2 mr-2" placeholder="検索" type="search" name="word" id="word">
+                <input type="submit" value="検索" class="media-none btn btn-outline-secondary mb-2" data-disable-with="検索">
+            </form>
+        </div>
+        <div class="d-flex py-1 ms-4 mb-1">
+            @foreach($tags as $tag)
+            <div class="border border-secondary rounded px-2 mr-3">
+              <a class="tag-link" href="/sites/?tag={{$tag['id']}}">{{$tag->name}}</a>
+            </div>
+            @endforeach
+        </div>
     <div class="d-flex flex-wrap">
         @foreach($sites as $site)
         <li class="list-unstyled card-list my-4">

@@ -43,10 +43,22 @@
     background-color: #f1f3ff;
   }
 
+
+
 /* ーーーーレスポンシブーーーー */
 @media screen and (max-width:768px) {
   .card-list {
     width: 95%;
     margin: 0 auto;
   }
+
+  .search {
+    width: 95%;
+    margin-top: 20px;
+  }
+
+  .media-none {
+    display: none;
+  }
+  
 }
