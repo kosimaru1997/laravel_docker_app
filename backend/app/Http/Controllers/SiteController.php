@@ -42,30 +42,28 @@ class SiteController extends Controller
         $sites = $request->all();
         $site_id = null;
 
-        DB::transaction(function() use(&$site_id, $sites){
+        DB::transaction(function() use($site_id, $sites){
 
-            $site_model = new Site();
-            $site_id = $site_model->saveSiteInfo($sites['url'], $sites['note']);
+            $site_id = Site::insertGetId(['url'=> $sites['url'], 'title'=> $sites['title'], 'image'=> $sites['image'], 'note'=> $sites['note'], 'description'=> $sites['description'], 'user_id'=> \Auth::id()]);
 
             if(!empty($sites['tag']) && !is_null($site_id)){
 
                 $tag_list = preg_split("/[\s,]+/", $sites['tag']);
                 foreach($tag_list as $tag){
-                    $tag_exists = Tag::where('user_id', '=', \Auth::id())
-                    ->where('name', '=', $tag)->exists();
-                    if(!$tag_exists){
+                    $tag_id = Tag::where('user_id', '=', \Auth::id())
+                    ->where('name', '=', $tag)->pluck('id');
+
+                    if(empty($tag_id[0])){
                         $tag_id = Tag::insertGetId(['user_id' => \Auth::id(), 'name' => $tag]);
                         SiteTag::insert(['site_id' => $site_id, 'tag_id' => $tag_id]);
+                    }else{
+                        SiteTag::insert(['site_id' => $site_id, 'tag_id' => $tag_id[0]]);
                     }
                 }
             }
         });
 
-        if(!is_null($site_id)){
-            return redirect( route('sites') );
-        }else{
-            return view('/site/new', compact('sites'));
-        }
+        return redirect( route('site_show',['id' => $site_id]) );
     }
 
     public function show($id)
@@ -91,16 +89,18 @@ class SiteController extends Controller
 
             Site::where('id', $id)->update(['note' => $sites['note']]);
             SiteTag::where('site_id', '=', $id)->delete();
-
             if(!empty($sites['tag'])){
 
                 $tag_list = preg_split("/[\s,]+/", $sites['tag']);
                 foreach($tag_list as $tag){
-                    $tag_exists = Tag::where('user_id', '=', \Auth::id())
-                    ->where('name', '=', $tag)->exists();
-                    if(!$tag_exists){
+                    $tag_id = Tag::where('user_id', '=', \Auth::id())
+                    ->where('name', '=', $tag)->pluck('id');
+
+                    if(empty($tag_id[0])){
                         $tag_id = Tag::insertGetId(['user_id' => \Auth::id(), 'name' => $tag]);
                         SiteTag::insert(['site_id' => $id, 'tag_id' => $tag_id]);
+                    }else{
+                        SiteTag::insert(['site_id' => $id, 'tag_id' => $tag_id[0]]);
                     }
                 }
             }
