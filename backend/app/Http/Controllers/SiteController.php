@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreSiteRequest;
 use App\Models\Site;
 use App\Models\SiteTag;
 use App\Models\Tag;
@@ -36,30 +37,35 @@ class SiteController extends Controller
         return view('/site/new');
     }
 
-    public function store(Request $request)
+    public function store(StoreSiteRequest $request)
     {
         $sites = $request->all();
+        $site_id = null;
 
-        DB::transaction(function() use($sites){
+        DB::transaction(function() use(&$site_id, $sites){
 
             $site_model = new Site();
             $site_id = $site_model->saveSiteInfo($sites['url'], $sites['note']);
 
-            if(!empty($sites['tag'])){
+            if(!empty($sites['tag']) && !is_null($site_id)){
 
-            $tag_list = preg_split("/[\s,]+/", $sites['tag']);
-            foreach($tag_list as $tag){
-                $tag_exists = Tag::where('user_id', '=', \Auth::id())
-                ->where('name', '=', $tag)->exists();
-                if(!$tag_exists){
-                    $tag_id = Tag::insertGetId(['user_id' => \Auth::id(), 'name' => $tag]);
-                    SiteTag::insert(['site_id' => $site_id, 'tag_id' => $tag_id]);
+                $tag_list = preg_split("/[\s,]+/", $sites['tag']);
+                foreach($tag_list as $tag){
+                    $tag_exists = Tag::where('user_id', '=', \Auth::id())
+                    ->where('name', '=', $tag)->exists();
+                    if(!$tag_exists){
+                        $tag_id = Tag::insertGetId(['user_id' => \Auth::id(), 'name' => $tag]);
+                        SiteTag::insert(['site_id' => $site_id, 'tag_id' => $tag_id]);
+                    }
                 }
             }
-        }
         });
 
-        return redirect( route('sites') );
+        if(!is_null($site_id)){
+            return redirect( route('sites') );
+        }else{
+            return view('/site/new', compact('sites'));
+        }
     }
 
     public function show($id)
