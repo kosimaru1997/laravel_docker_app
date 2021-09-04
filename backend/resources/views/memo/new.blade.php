@@ -15,7 +15,7 @@
     @else
         <script src="{{ asset('js/app.js') }}" defer></script>
         @endif
-        <script src="/js/confirm.js" defer></script>
+        <script src="/js/preview.js" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,7 +28,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @endif
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link href="/css/memo.css" rel="stylesheet">
+    <link href="/css/site.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -90,42 +90,37 @@
         </nav>
 
         <main class="py-4">
-            <div class="row m-0">
-                <div class="col-md-2 p-0">
-                    <div class="card">
-                        <div class="card-header">タグ一覧</div>
-                        <a href="/memo" class="card-text d-block mt-2 mx-2">すべてのメモを表示</a>
-                        <div class="card-body memo-card-body pt-1">
-                    @foreach($tags as $tag)
-                        <div class="d-flex">
-                            <a href="/memo/?tag={{$tag['id']}}" class="card-text d-block elipsis mb-2 mx-2">
-                                <span class="border rounded px-2">{{ $tag['name'] }}</span>
-                            </a>
-                            <form class=".btn-dell" action="{{ route('destroy_tag') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="tag_id" value="{{$tag['id']}}"/>
-                                <button type="submit" class="fas fa-times fa-sm btn btn-outline-secondary cursor-p btn-dell p-1"></button>
-                            </form>
+            <div class="card">
+                <div class="card-header">新規メモ作成</div>
+                <form class="card-body" action="{{ route('store') }}" method="POST">
+                    @csrf
+                    <div class="file-header d-flex">
+                        <div class="border-top border-left border-right events-none bg-white py-2 px-3" id="markdown">
+                            Edit note
                         </div>
-                    @endforeach
+                        <div class="events-auto border-top border-right bg-light-grey py-2 px-3" ,="" id="preview">
+                            Preview
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 p-0">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">メモ一覧 <a href="{{ route('memo') }}"><i class="fas fa-plus-circle"></i></a></div>
-                        <div class="card-body memo-card-body">
-                    @foreach($memos as $memo)
-                          <a href="{{ route('edit',['id'=>$memo])}}" class="card-text d-block elipsis mb-2">{{ $memo['content'] }}</a>
-                    @endforeach
-                        </div>
+                    <div id="preview-area"></div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="md-textarea" name="content" rows="3" placeholder="ここにメモを入力"></textarea>
                     </div>
-                </div>
-                <div class="col-md-6 p-0">
-                    @yield('content')
-                </div>
+                    @error('content')
+                        <div class="alert alert-danger">メモ内容を入力してください！</div>
+                    @enderror
+                @foreach($tags as $tag)
+                    <div class="form-check form-check-inline mb-3">
+                      <input class="form-check-input" type="checkbox" name="tags[]" id="{{ $tag['id'] }}" value="{{ $tag['id'] }}">
+                      <label class="form-check-label" for="{{ $tag['id'] }}">{{ $tag['name']}}</label>
+                    </div>
+                @endforeach
+                    <input type="text" class="form-control w-50 mb-3" name="new_tag" placeholder="新しいタグを入力" />
+                    <button type="submit" class="btn btn-outline-secondary">保存</button>
+                </form>
             </div>
         </main>
     </div>
 </body>
 </html>
+

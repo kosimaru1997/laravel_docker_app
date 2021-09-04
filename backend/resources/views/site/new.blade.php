@@ -22,12 +22,12 @@
                 @enderror
                 <input class="form-control mb-3" placeholder="例：https://hogehoge" type="text" name="url" id="site_url" value="{{ old('url') }}">
                 <div class="file-header d-flex">
-                <div class="border-top border-left border-right events-none bg-white py-2 px-3" id="markdown">
-                     Edit note
-                </div>
-                <div class="events-auto border-top border-right bg-light-grey py-2 px-3" ,="" id="preview">
-                    Preview
-                </div>
+                    <div class="border-top border-left border-right events-none bg-white py-2 px-3" id="markdown">
+                        Edit note
+                    </div>
+                    <div class="events-auto border-top border-right bg-light-grey py-2 px-3" ,="" id="preview">
+                        Preview
+                    </div>
                 </div>
                 <div id="preview-area"></div>
                 <div id="note-form">

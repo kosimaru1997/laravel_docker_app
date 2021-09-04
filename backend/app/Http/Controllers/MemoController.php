@@ -21,6 +21,11 @@ class MemoController extends Controller
         return view('/memo/create');
     }
 
+    public function new()
+    {
+        return view('/memo/new');
+    }
+
     public function store(Request $request) {
         $posts = $request->all();
         $request->validate([ 'content' => 'required']);

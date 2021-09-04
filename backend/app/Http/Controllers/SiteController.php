@@ -42,7 +42,7 @@ class SiteController extends Controller
         $sites = $request->all();
         $site_id = null;
 
-        DB::transaction(function() use($site_id, $sites){
+        DB::transaction(function() use(&$site_id, $sites){
 
             $site_id = Site::insertGetId(['url'=> $sites['url'], 'title'=> $sites['title'], 'image'=> $sites['image'], 'note'=> $sites['note'], 'description'=> $sites['description'], 'user_id'=> \Auth::id()]);
 
