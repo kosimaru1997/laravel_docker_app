@@ -72,7 +72,7 @@
                     <a href="/site/{{$site->id}}/edit" class="mr-4">
                         <i class="far fa-edit fa-lg cursor-p"></i>
                     </a>
-                    <form class=".btn-dell" action="site/{{$site->id}}" method="POST">
+                    <form class=".btn-dell" action="site/{{$site->id}}/destroy" method="POST">
                         @csrf
                         <button type="submit" class="fas fa-trash fa-sm btn btn-outline-secondary cursor-p btn-dell mb-1 p-1"></button>
                     </form>
