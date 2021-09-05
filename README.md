@@ -2,7 +2,8 @@
 
 [Laravel-SiteNote](https://laravel-site-note.herokuapp.com/)
 
-Railsで作成したこちらのサイト「SiteNote」(https://github.com/kosimaru1997/site_note) にメモ帳機能を着けたサイトをLravelで作成しました。  
+Railsで作成したこちらのサイト「SiteNote」(https://github.com/kosimaru1997/site_note) に  
+メモ帳機能を着けたサイトをLravelで作成しました。  
 お気に入りのサイトや学習で利用したサイトにあなたのメモを添えて管理できるサイトです。
 
 ## 機能・実装一覧
