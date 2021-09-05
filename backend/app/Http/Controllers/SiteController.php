@@ -8,6 +8,7 @@ use App\Models\Site;
 use App\Models\SiteTag;
 use App\Models\Tag;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
@@ -77,6 +78,10 @@ class SiteController extends Controller
     public function edit($id)
     {
         $site = Site::find($id);
+        if(\Auth::user() != $site->user){
+            return redirect( route('sites'));
+        }
+
         $tags = $site->tags;
         return view('/site/edit', compact('site', 'tags'));
     }
@@ -84,6 +89,11 @@ class SiteController extends Controller
     public function update($id, Request $request)
     {
         $sites = $request->all();
+        $site = Site::find($id);
+
+        if($site->user != \Auth::user()){
+            return redirect('sites');
+        }
 
         DB::transaction(function () use($id, $sites){
 
@@ -118,7 +128,10 @@ class SiteController extends Controller
 
     public function destroy($id)
     {
-        Site::where('id', $id)->delete();
+        $site = Site::find($id);
+        if ($site->user == \Auth::user()){
+            $site->delete();
+        }
         return redirect( route('sites'));
     }
 

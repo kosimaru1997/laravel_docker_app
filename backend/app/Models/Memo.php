@@ -9,6 +9,10 @@ class Memo extends Model
 {
     use HasFactory;
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     public function getMyMemo(){
         $query_tag = \Request::query('tag');
 

@@ -7,6 +7,7 @@ use App\Models\Memo;
 use App\Models\Tag;
 use App\Models\MemoTag;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class MemoController extends Controller
 {
@@ -19,11 +20,6 @@ class MemoController extends Controller
     public function index()
     {
         return view('/memo/create');
-    }
-
-    public function new()
-    {
-        return view('/memo/new');
     }
 
     public function store(Request $request) {
@@ -58,6 +54,10 @@ class MemoController extends Controller
             ->whereNull('memos.deleted_at')
             ->get();
 
+        if($edit_memo->user != \Auth::user()){
+            return redirect(route('memo'));
+        }
+
         $include_tags = [];
         foreach($edit_memo as $memo){
             array_push($include_tags, $memo['tag_id']);
@@ -74,10 +74,14 @@ class MemoController extends Controller
     public function update(Request $request){
         $posts = $request->all();
         $request->validate([ 'content' => 'required']);
+        $memo = Memo::where('id', $posts['memo_id']);
+        if($memo->user != \Auth::user()){
+            return redirect(route('memo'));
+        }
 
-        DB::transaction(function () use($posts){
+        DB::transaction(function () use($posts, $memo){
 
-            Memo::where('id', $posts['memo_id'])->update(['content' => $posts['content']]);
+            $memo->update(['content' => $posts['content']]);
 
             MemoTag::where('memo_id', '=', $posts['memo_id'])->delete();
 
