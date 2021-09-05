@@ -1,6 +1,8 @@
 # llaravel-SiteNote
 
-Railsで作成したこちらのサイト（SiteNote)にメモ帳機能を着けたサイトを Lravelで作成しました。  
+
+
+Railsで作成したこちらのサイト「SiteNote」(https://github.com/kosimaru1997/site_note) にメモ帳機能を着けたサイトをLravelで作成しました。  
 お気に入りのサイトや学習で利用したサイトにあなたのメモを添えて管理できるサイトです。
 
 ## 機能・実装一覧
@@ -24,7 +26,10 @@ Railsで作成したこちらのサイト（SiteNote)にメモ帳機能を着け
 
 ## Dockerでの環境構築
 
+実行環境  
+macOS Big sur 11.5.2  
 Docker version 20.10.5
+
 
 ```
 git clone https://github.com/kosimaru1997/laravel_docker_app.git
