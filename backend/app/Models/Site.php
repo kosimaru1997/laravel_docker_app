@@ -28,7 +28,7 @@ class Site extends Model
         @$dom->loadHTML($html);
         $xpath = new \DOMXPath($dom);
         //XPathでmetaタグのog:titleおよびog:imageを取得
-        $node_title = $xpath->query('//meta[@property="og:title"]/@content');
+        $node_title = $dom->getElementsByTagName('title');
         $node_image = $xpath->query('//meta[@property="og:image"]/@content');
         $node_description = $xpath->query('//meta[@property="og:description"]/@content');
 
@@ -53,20 +53,29 @@ class Site extends Model
         @$dom->loadHTML($html);
         $xpath = new \DOMXPath($dom);
         //XPathでmetaタグのog:titleおよびog:imageを取得
-        $node_title = $xpath->query('//meta[@property="og:title"]/@content');
+        $node_title = $dom->getElementsByTagName('title');
         $node_image = $xpath->query('//meta[@property="og:image"]/@content');
         $node_description = $xpath->query('//meta[@property="og:description"]/@content');
 
         if ($node_title->length > 0) {
             //タイトルが存在すればサイトの情報を保存
             $title = $node_title->item(0)->nodeValue;
-            $image = $node_image->item(0)->nodeValue;
-            $description = $node_description->item(0)->nodeValue;
         }else{
             $title = null;
+        }
+
+        if ($node_image->length > 0) {
+            $image = $node_image->item(0)->nodeValue;
+        }else{
             $image = null;
+        }
+
+        if ($node_description->length > 0) {
+            $description = $node_description->item(0)->nodeValue;
+        }else{
             $description = null;
         }
+
         return ['title' => $title, 'image' => $image, 'description' => $description];
     }
 }
