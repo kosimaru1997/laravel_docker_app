@@ -1,6 +1,9 @@
 # llaravel-SiteNote
 
-[Laravel-SiteNote](https://laravel-site-note.herokuapp.com/)
+[Laravel-SiteNote](https://laravel-site-note.herokuapp.com/)  
+「テストユーザー  
+　email: test@test.com  
+　password: password  」
 
 Railsで作成したこちらのサイト「SiteNote」(https://github.com/kosimaru1997/site_note) に  
 メモ帳機能を着けたサイトをLravelで作成しました。  
