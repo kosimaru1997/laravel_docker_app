@@ -47,6 +47,7 @@ app コンテナに入り、各設定をします。
 ```
 docker compose exec app bash
 composer install
+#.envは適宜設定してください。
 cp .env.example .env
 php artisan key:generate
 php artisan migrate
