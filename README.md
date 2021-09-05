@@ -3,9 +3,14 @@
 <img src="https://user-images.githubusercontent.com/79825084/132143060-83a2a055-2dab-471d-9d8e-fe8127933230.png" width="45%">
 <img src="https://user-images.githubusercontent.com/79825084/132143061-61771b1d-8424-4f5c-83cb-cc788054cbf7.png" width="45%">
 </div>
+</br>
+<div>
+<img src="https://user-images.githubusercontent.com/79825084/132143191-1876502f-b7dd-4a3c-ae4d-530e6ade1e7b.png" width="22%">
+<img src="https://user-images.githubusercontent.com/79825084/132143192-55f880e5-ab29-48f3-91d8-3b069a3cdc73.png" width="35%">
+</div>  
+</br>
   
-  
-[Laravel-SiteNote](https://laravel-site-note.herokuapp.com/)  
+### [Laravel-SiteNote](https://laravel-site-note.herokuapp.com/)  
 「テストユーザー  
 　email: test@test.com  
 　password: password  」
