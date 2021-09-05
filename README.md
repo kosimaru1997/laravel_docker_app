@@ -38,7 +38,7 @@ Railsで作成したこちらのサイト「SiteNote」(https://github.com/kosim
 - デプロイ：Heroku
 
 
-## Dockerでの環境構築
+## Dockerでの環境構築(ローカル環境で利用する場合）
 
 実行環境  
 macOS Big sur 11.5.2  
