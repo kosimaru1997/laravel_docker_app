@@ -54,7 +54,7 @@ class MemoController extends Controller
             ->whereNull('memos.deleted_at')
             ->get();
 
-        if($edit_memo->user != \Auth::user()){
+        if(Memo::find($id)->user != \Auth::user()){
             return redirect(route('memo'));
         }
 
@@ -75,7 +75,8 @@ class MemoController extends Controller
         $posts = $request->all();
         $request->validate([ 'content' => 'required']);
         $memo = Memo::where('id', $posts['memo_id']);
-        if($memo->user != \Auth::user()){
+
+        if(Memo::find($posts['memo_id']) !== \Auth::user()){
             return redirect(route('memo'));
         }
 
