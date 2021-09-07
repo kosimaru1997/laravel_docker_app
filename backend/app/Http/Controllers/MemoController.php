@@ -76,7 +76,7 @@ class MemoController extends Controller
         $request->validate([ 'content' => 'required']);
         $memo = Memo::where('id', $posts['memo_id']);
 
-        if(Memo::find($posts['memo_id']) !== \Auth::user()){
+        if(Memo::find($posts['memo_id'])->user != \Auth::user()){
             return redirect(route('memo'));
         }
 

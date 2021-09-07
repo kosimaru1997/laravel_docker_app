@@ -21,10 +21,10 @@ class CreateSitesTable extends Migration
             $table->text('description')->nullable();
             $table->longText('note')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(\DB::raw('now()::timestamp(0)'));
+            $table->timestamp('created_at')->default(\DB::raw('now()::timestamp(0)'));
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        }); 
+        });
     }
 
     /**
